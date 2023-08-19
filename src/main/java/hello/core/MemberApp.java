@@ -8,16 +8,13 @@ import hello.core.member.Member;
 import hello.core.member.MemberService;
 
 public class MemberApp {
-	public static void main(String[] args) {
-		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-		final MemberService memberService = applicationContext.getBean("memberService",
-			MemberService.class);
-
-		final Member member = new Member(1L, "memberA", Grade.VIP);
-		memberService.join(member);
-
-		final Member findMember = memberService.findMember(1L);
-		System.out.println("new member = " + member.getName());
-		System.out.println("find member = " + findMember.getName());
-	}
+    public static void main(String[] args) {
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
+        Member member = new Member(1L, "memberA", Grade.VIP);
+        memberService.join(member);
+        Member findMember = memberService.findMember(1L);
+        System.out.println("new member = " + member.getName());
+        System.out.println("find Member = " + findMember.getName());
+    }
 }

@@ -10,18 +10,14 @@ import hello.core.order.Order;
 import hello.core.order.OrderService;
 
 public class OrderApp {
-	public static void main(String[] args) {
-		ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
-		final MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
-		final OrderService orderService = applicationContext.getBean("orderService", OrderService.class);
-
-		final long memberId = 1L;
-		final Member member = new Member(memberId, "memberA", Grade.VIP);
-		memberService.join(member);
-
-		final Order order = orderService.createOrder(memberId, "itemA", 10000);
-
-		System.out.println("order = " + order);
-		System.out.println("order.calculatePrice = " + order.calculatePrice());
-	}
+    public static void main(String[] args) {
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
+        MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
+        OrderService orderService = applicationContext.getBean("orderService", OrderService.class);
+        long memberId = 1L;
+        Member member = new Member(memberId, "memberA", Grade.VIP);
+        memberService.join(member);
+        Order order = orderService.createOrder(memberId, "itemA", 10000);
+        System.out.println("order = " + order);
+    }
 }

@@ -15,26 +15,23 @@ import hello.core.order.OrderServiceImpl;
 //전체를 설정하고 구성
 @Configuration
 public class AppConfig {
-	@Bean
-	public MemberService memberService() {
-		return new MemberServiceImpl(memberRepository());
-	}
+    @Bean
+    public MemberService memberService() {
+        return new MemberServiceImpl(memberRepository());
+    }
 
-	@Bean
+    @Bean
+    public OrderService orderService() {
+        return new OrderServiceImpl(memberRepository(), discountPolicy());
+    }
 
-	public MemberRepository memberRepository() {
-		return new MemoryMemberRepository();
-	}
+    @Bean
+    public MemberRepository memberRepository() {
+        return new MemoryMemberRepository();
+    }
 
-	@Bean
-
-	public OrderService orderService() {
-		return new OrderServiceImpl(memberRepository(), getDiscountPolicy());
-	}
-
-	@Bean
-
-	public DiscountPolicy getDiscountPolicy() {
-		return new RateDiscountPolicy();
-	}
+    @Bean
+    public DiscountPolicy discountPolicy() {
+        return new RateDiscountPolicy();
+    }
 }
